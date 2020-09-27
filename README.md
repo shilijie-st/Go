@@ -9,3 +9,5 @@ Learning Go!
     $ go run
     $ go build
     $ go run -gcflags
+三、常用方法
+    1.json.Marshal() 和 json.Unmarshal() 实现数据的序列化和反序列化
