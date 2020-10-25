@@ -18,10 +18,34 @@
 			Write(p []byte)(n int,err error)
 			Go语言的每个接口中的方法数量不会很多，Go希望通过一个接口精准描述它自己的功能，而通过多个接口的嵌入和组合的方式将简单的接口扩展为复杂的接口。
 		}
+	实现接口的条件
+		1. 接口的方法与实现接口的类型方法格式一致（即方法的签名必须一致）
+		2. 接口中的所有方法均被实现
+
+		值得一提的是，Go语言接口的实现是隐式的，无须让实现接口的类写出实现了哪些接口，这种设计被称为侵入式设计。
 
 */
 package main
 
-func main() {
+import "fmt"
 
+//DataWriter A interface
+type DataWriter interface {
+	WriteDate(data interface{}) error
+}
+
+//file difine a struct
+type file struct {
+}
+
+//WriteDate 实现DataWriter中的WriteDate方法
+func (d *file) WriteDate(data interface{}) error {
+	fmt.Println("Write Data:", data)
+	return nil
+}
+func main() {
+	f := new(file)
+	var writer DataWriter
+	writer = f
+	writer.WriteDate("DATA")
 }
